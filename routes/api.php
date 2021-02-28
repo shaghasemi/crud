@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\PostController;
+use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -18,11 +20,34 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+// Alaki
 Route::get('test', function () {
     return 'Working  Smoothly';
 });
 
+// Alaki
 Route::get('json', function () {
     return ["message" => 'Returning JSON'];
 });
 
+// Posts
+
+// A CRUD project contains:
+// 1. Get all (GET) /api/posts
+// 2. Create a post (POST) /api/posts
+// 3. Get a single (GET) /api/posts/{id}
+// 4. Update a single (PUT/PATCH) /api/posts/{id}
+// 5. Delete (DELETE) /api/posts/{id}
+
+Route::resource('posts', 'PostController');
+/*Route::get('/posts', 'PostController@index');
+Route::post('/posts', 'PostController@store');
+Route::put('/posts', 'PostController@update');
+Route::delete('/posts', 'PostController@destroy');*/
+
+// To create a resource in laravel (post)
+// 1. Create the database and migrations
+// 2. Create a model
+// 2.5 Create a service (Eloquent ORM)
+// 3. Create a controller to get info from the database
+// 4. Return the info
