@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\PostController;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -26,9 +25,9 @@ Route::get('test', function () {
 });
 
 // Alaki
-Route::get('json', function () {
+/*Route::get('json', function () {
     return ["message" => 'Returning JSON'];
-});
+});*/
 
 // Posts
 
@@ -39,7 +38,7 @@ Route::get('json', function () {
 // 4. Update a single (PUT/PATCH) /api/posts/{id}
 // 5. Delete (DELETE) /api/posts/{id}
 
-Route::resource('posts', 'PostController');
+//Route::resource('posts', 'PostController');
 /*Route::get('/posts', 'PostController@index');
 Route::post('/posts', 'PostController@store');
 Route::put('/posts', 'PostController@update');
@@ -51,3 +50,27 @@ Route::delete('/posts', 'PostController@destroy');*/
 // 2.5 Create a service (Eloquent ORM)
 // 3. Create a controller to get info from the database
 // 4. Return the info
+
+/*Route::get('/posts', function () {
+    $post = Post::create([
+        'title' => 'my first post',
+        'slug' => 'my_first_post'
+    ]);
+    return $post;
+});*/
+
+/*Route::post('/posts');
+Route::put('/posts/{id}');
+Route::delete('/posts/{id}');*/
+
+// Trying new systme for API
+/*Route::get('/posts', 'App\Http\Controllers\PostController@index');
+Route::post('/posts', 'App\Http\Controllers\PostController@store');
+Route::get('/posts', 'App\Http\Controllers\PostController@show');
+Route::put('/posts', 'App\Http\Controllers\PostController@update');
+Route::delete('/posts', 'App\Http\Controllers\PostController@destroy');*/
+
+// Newest shortest way to write it
+Route::prefix('v1')->group(function () {
+    Route::apiResource('posts', 'App\Http\Controllers\PostController');
+});
